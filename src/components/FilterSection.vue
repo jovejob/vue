@@ -6,7 +6,8 @@
       placeholder="Search..."
       class="block w-full p-3 text-sm bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out md:text-base lg:text-lg"
     />
-    
+
+    <!-- todo add a skeleton while loading/fetching data -->
     <CountrySelect />
     <LanguageSelect />
     <CategorySelect />

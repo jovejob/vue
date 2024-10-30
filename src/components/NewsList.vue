@@ -2,6 +2,8 @@
   <div
     class="news-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
   >
+    <NoResults v-if="news.length === 0" />
+
     <div
       v-for="article in news"
       :key="article.article_id"
@@ -52,6 +54,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useNewsStore } from '../stores/useNewsStore'
+import NoResults from './NoResults.vue';
 
 const newsStore = useNewsStore()
 const news = computed(() => newsStore.filteredNews)
