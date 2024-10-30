@@ -38,7 +38,7 @@
       </a>
     </div>
 
-    <!-- todo Move to another client component -->
+    <!-- todo Move to another client component (Implement scroll to load func)-->
     <button
       v-if="hasNextPage"
       @click="loadMore"
