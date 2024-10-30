@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vue-news-app
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -55,3 +56,7 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+=======
+# vue
+NewsData.io
+>>>>>>> a5d14a2804ffb58af2f1f539524bc895a8e5bce5
