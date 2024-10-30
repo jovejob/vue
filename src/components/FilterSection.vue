@@ -6,6 +6,7 @@
       placeholder="Search..."
       class="block w-full p-3 text-sm bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out md:text-base lg:text-lg"
     />
+    
     <CountrySelect />
     <LanguageSelect />
     <CategorySelect />
@@ -13,7 +14,11 @@
     <!-- todo move to button component -->
     <button
       @click="onSubmit"
-      class="block w-full p-3 text-sm bg-blue-500 text-white border border-gray-300 rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out md:text-base lg:text-lg"
+      :disabled="isButtonDisabled"
+      :class="[
+        'block w-full p-3 text-sm text-white border border-gray-300 rounded-lg shadow-sm transition duration-200 ease-in-out md:text-base lg:text-lg',
+        isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+      ]"
     >
       Search
     </button>
@@ -29,10 +34,18 @@ import CategorySelect from './CategorySelect.vue'
 
 const newsStore = useNewsStore()
 
+// Local state for search query
+const searchQuery = ref('')
+
 // Computed properties to pull values from the store
-const searchQuery = ref(newsStore.filters.searchQuery)
+const country = computed(() => newsStore.filters.country)
 const language = computed(() => newsStore.filters.language)
 const category = computed(() => newsStore.filters.category)
+
+// Disable the button if searchQuery is empty or if no language/category/country is selected
+const isButtonDisabled = computed(() => {
+  return !searchQuery.value.trim() && !language.value && !category.value && !country.value
+})
 
 // Trigger search only when the submit button is clicked
 const onSubmit = () => {
