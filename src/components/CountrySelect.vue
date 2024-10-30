@@ -13,7 +13,9 @@
         {{ country.name }}
       </option>
     </select>
-    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+    <div
+      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+    >
       <svg
         class="w-5 h-5 text-gray-500"
         fill="none"
@@ -33,39 +35,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useNewsStore } from '../stores/useNewsStore';
+import { ref, onMounted, computed } from 'vue'
+import { useNewsStore } from '../stores/useNewsStore'
 
-const newsStore = useNewsStore();
-const countries = ref([]);
+const newsStore = useNewsStore()
+const countries = ref([])
 
 // This is the selected country from the store
 const selectedCountry = computed({
   get: () => newsStore.filters.country,
-  set: (value) => newsStore.setFilter('country', value)
-});
+  set: value => newsStore.setFilter('country', value),
+})
 
 // todo move to a service (Fetch countries from API)
 const fetchCountries = async () => {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all');
-    const data = await response.json();
-    
+    const response = await fetch('https://restcountries.com/v3.1/all')
+    const data = await response.json()
+
     // Map and sort countries alphabetically by name
     countries.value = data
       .map(country => ({
         code: country.cca2.toLowerCase(), // Country code in lowercase
-        name: country.name.common // Common name of the country
+        name: country.name.common, // Common name of the country
       }))
-      .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
-
+      .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically
   } catch (error) {
-    console.error('Error fetching countries:', error);
+    console.error('Error fetching countries:', error)
   }
-};
+}
 
 // Fetch countries when the component mounts
-onMounted(fetchCountries);
+onMounted(fetchCountries)
 </script>
 
 <style scoped>

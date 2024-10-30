@@ -13,7 +13,9 @@
         {{ category.name }}
       </option>
     </select>
-    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+    <div
+      class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+    >
       <svg
         class="w-5 h-5 text-gray-500"
         fill="none"
@@ -34,17 +36,17 @@
 
 <!-- todo extract BaseSelect and reuse the component -->
 <script setup>
-import { ref, computed } from 'vue';
-import { useNewsStore } from '../stores/useNewsStore';
-import { categories } from '../mocks/categories'; // Import the static categories
+import { ref, computed } from 'vue'
+import { useNewsStore } from '../stores/useNewsStore'
+import { categories } from '../mocks/categories' // Import the static categories
 
-const newsStore = useNewsStore();
+const newsStore = useNewsStore()
 
 // Bind selected category to the store
 const selectedCategory = computed({
   get: () => newsStore.filters.category,
-  set: (value) => newsStore.setFilter('category', value)
-});
+  set: value => newsStore.setFilter('category', value),
+})
 </script>
 
 <!-- todo extract the style and import it in a BaseSelect and reuse the component -->
